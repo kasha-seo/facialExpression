@@ -67,9 +67,7 @@ Test 이미지를 opencv를 이용하여 도출된 얼굴인식 이미지를 이
     GCP 라이센스가 조금 남아 있으니, 다음에 도전해보자! 
 
 ## 시연 영상
-<video width="320" height="240" controls>
-  <source src="markdownImage/testVideo.mov" type="video/mp4">
-</video>
+[![시연 영상 링크](markdownImage/videoPreview.png)](https://youtu.be/uQ_o1R8JBww)
 
 ## Hackerton
 ![last1](markdownImage/last1.jpg)
