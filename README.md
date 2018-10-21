@@ -13,24 +13,22 @@ GCP Kubernetes에 배포 운영.
 2. HOC(Histogram of Oriented Gradients)를 이용하여 얼굴을 찾는다.
     HOC는 각 픽셀에 대하여 이를 둘러싸고 있는 픽셀들과 비교하여, 어두운 방향을 나타내는 화살표를 나타내는 방식이고,
     이 화살표를 그래디언트(gradient)라 한다.
-    ![HOC1](markdownImage/HOC1.png)
+    <img src="markdownImage/HOC1.png" width="80%"><br/>
     이러한 프로세스를 통해 전체 이미지에서 밝은 부분으로부터 어두운 부분으로의 흐름을 알 수 있다.
     아래 이미지의 왼쪽 패턴은 여러 이미지를 학습시켜 도출된 패턴이며, 오른쪽 패턴은 하나의 이미지에서 HOC를 적용한 아웃풋이다. 
-    ![HOC2](markdownImage/HOC2.png)
+    <img src="markdownImage/HOC2.png" width="80%"><br/>
     이러한 절차는 dlib이라는 library를 이용하여 해결할수 있다.
 3. Landmark를 통하여 얼굴인식 성능 높이기
     사진에서 얼굴이 항상 정면을 바라보진 않기때문에, 측면을 보거나, 명암 등의 조건을 고려했을때
     동일한 얼굴로 판단하기 위해서, 얼굴에 존재하는 68개의 랜드마크를 이용하여 눈,코,입을 이미지 상에서 대략 동일한 위치에 맞출수 있음. 
-    ![landmark1](markdownImage/landmark1.png)
+    <img src="markdownImage/landmark1.png" width="80%"><br/>
     이러한 절차는 openface 라이브러리의 shape_predictor_68_face_landmarks를 통해 해결수 있다.
     (이 방법은 여러 각도의 사진에서 해당 사람이 같은 사람인지 판별할때 보다 적합함.)
-4. 일련의 절차
-   ![process1](markdownImage/process1.jpeg)
-   input data
-   ![process3](markdownImage/process3.png)
-   HOC를 통해 얼굴을 찾은뒤, Landmark를 통해 얼굴의 특징을 찾기
-   ![process4](markdownImage/process4.jpg)
-   찾은 얼굴의 특징을 통해 얼굴을 평면으로 늘리기.
+4. 일련의 절차 <br/>
+    <img src="markdownImage/process1.jpeg" width="30%">
+    <img src="markdownImage/process3.png" width="30%">
+    <img src="markdownImage/process4.jpg" width="30%"><br/>
+    Input Image => HOC를 통해 얼굴을 찾은뒤, Landmark를 통해 얼굴의 특징을 찾기 => 찾은 얼굴의 특징을 통해 얼굴을 평면으로 늘리기.
 
 ## 캐글 데이터를 이용한 표정 학습
 데이터 셋은 이미지 사이즈가 48*48로 되어 있고, 결과 값은 7가지 표정이므로(0=Angry, 1=Disgust, 2=Fear, 3=Happy, 4=Sad, 5=Surprise, 6=Neutral)
@@ -69,12 +67,12 @@ Test 이미지를 opencv를 이용하여 도출된 얼굴인식 이미지를 이
 ## 시연 영상
 [![시연 영상 링크](markdownImage/videoPreview.png)](https://youtu.be/uQ_o1R8JBww)
 
-## Hackerton
-![last1](markdownImage/last1.jpg)
+## Hackerton 
+<img src="markdownImage/last1.jpg" width="30%">
+<img src="markdownImage/last2.jpg" width="30%">
+<img src="markdownImage/last3.jpg" width="30%"> <br/>
 해커톤 대회 3일전부터 개발 시작하여 회사 퇴근후, 밤마다 작업의 흔적.
-![last2](markdownImage/last2.jpg)
 해커톤에서 발표하고 있는 저의 모습(그룹장 서진혁).
-![last3](markdownImage/last3.jpg)
 그렇게 '링크드'팀은 전체 18개 팀중 2등을 하였습니다.
 ![last4](markdownImage/last4.jpg)
 밤마다 작업하여, 마감 전까지 불태워 짧지만 빡새게 한 만큼 보람이 있었던 해커톤.
