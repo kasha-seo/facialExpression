@@ -68,13 +68,14 @@ Test 이미지를 opencv를 이용하여 도출된 얼굴인식 이미지를 이
 [![시연 영상 링크](markdownImage/videoPreview.png)](https://youtu.be/uQ_o1R8JBww)
 
 ## Hackerton 
-<img src="markdownImage/last1.jpg" width="30%">
-<img src="markdownImage/last2.jpg" width="30%">
-<img src="markdownImage/last3.jpg" width="30%"> <br/>
-해커톤 대회 3일전부터 개발 시작하여 회사 퇴근후, 밤마다 작업의 흔적.
-해커톤에서 발표하고 있는 저의 모습(그룹장 서진혁).
-그렇게 '링크드'팀은 전체 18개 팀중 2등을 하였습니다.
-![last4](markdownImage/last4.jpg)
+<img src="markdownImage/last1.jpg" width="50%"> <br/>
+해커톤 대회 3일전부터 개발 시작하여 회사 퇴근후, 밤마다 작업의 흔적. <br/>
+<img src="markdownImage/last2.jpg" width="50%"> <br/>
+해커톤에서 발표하고 있는 저의 모습(그룹장 서진혁). <br/>
+<img src="markdownImage/last3.jpg" width="50%"> <br/>
+그렇게 '링크드'팀은 전체 18개 팀중 2등을 하였습니다. <br/>
+
+<img src="markdownImage/last4.jpg" width="80%"> <br/>
 밤마다 작업하여, 마감 전까지 불태워 짧지만 빡새게 한 만큼 보람이 있었던 해커톤.
 
 ## pip3로 설치되지 않는 의존성 설치 (dlib, openface)
