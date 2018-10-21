@@ -10,7 +10,7 @@ GCP Kubernetes에 배포 운영.
 1. 얼굴을 인식하는데, 색상 데이터는 크게 중요하지 않음.
     색상 image shape (width, height, 3)의 3은 BGR데이터를 의미하며,
     불필요한 데이터는 연산 속도를 낮추므로, (width, height, 1)로 흑백 이미지로 변환한다.
-2. HOC(Histogram of Oriented Gradients)를 이용하여 얼굴을 찾는다.
+2. HOC(Histogram of Oriented Gradients)를 이용하여 얼굴을 찾는다. <br/>
     HOC는 각 픽셀에 대하여 이를 둘러싸고 있는 픽셀들과 비교하여, 어두운 방향을 나타내는 화살표를 나타내는 방식이고,
     이 화살표를 그래디언트(gradient)라 한다.
     <img src="markdownImage/HOC1.png" width="80%"><br/>
@@ -39,7 +39,7 @@ softmax를 이용하여 나오는 출력 뉴런의 수는 7이다. <br/>
 표정인식은 CNN을 이용하여 학습시켰고, 주피터 노트북으로 모델을 summary한 결과는 아래 링크와 같다. <br/>
 [model summary](https://github.com/SeoJinHyuk14/facialExpression/blob/master/src/data/modelSummary.md) 
 
-Keras에서 만든 모델을 저장할 때는 다음과 같은 룰을 따릅니다. <br/>
+Keras를 이용하여 만든 모델을 저장할 때는 다음과 같은 룰을 따릅니다. <br/>
 모델은 JSON 파일 또는 YAML 파일로 저장한다. <br/>
 Weight는 H5 파일로 저장한다. <br/>
 서비스를 이용할땐, model.json 파일과, 학습된 가중치 파일 weight.h5을 이용하면 된다. <br/>
