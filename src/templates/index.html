@@ -1,0 +1,224 @@
+
+<!Doctype html>
+<html lang="kor">
+<head>
+    <meta charset="UTF-8">
+    <title>표정인식기</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+     <style>
+        body{background: #8fc3d9; height: 100vh; overflow: hidden}
+        .body_wrap{padding: 60px}
+        h1{color: #003e6b; text-align: center; margin-bottom: 70px}
+        h1 span{color: #2577c6}
+        input[type="file"]{display: none;}
+        .btn_upload{display: block; width:300px; height: 60px; border-radius:10px; background-color:#3575a3; color: #fff; text-align: center; line-height: 60px; font-size:20px; margin: 0 auto; cursor: pointer; position: relative; transition: all .3s}
+        .btn_upload:hover{top: 1px; box-shadow: 0px 6px 18px 1px rgba(0,0,0,0.2);}
+        .img_wrap{width: 500px; height: 500px; margin: 120px auto; position: relative; background:#fff; border-radius: 15px; object-fit: cover}
+        .img_wrap img{object-fit: cover; width: 100%; height: 100%; border-radius: 15px}
+        .speech_bubble {
+            display: block;
+            width:320px;
+            height: 140px;
+            position: absolute;
+            right: -170px;
+            top: -60px;
+            background: #003e6b;
+            border-radius: 30px;
+            text-align: center;
+            line-height: 140px;
+            color: #fff;
+            font-size: 24px;
+            z-index: 999;
+        }
+        .speech_bubble:after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 90px;
+            width: 0;
+            height: 0;
+            border: 34px solid transparent;
+            border-top-color: #003e6b;
+            border-bottom: 0;
+            border-left: 0;
+            margin-left: -17px;
+            margin-bottom: -34px;
+        }
+        .loader{
+            position: absolute; left:0; top:0; width: 100%; height: 100%; background: rgba(0,0,0,.4); border-radius:15px; display: none;
+        }
+        p{
+            color:#FFF;
+            font-size:16px;
+            text-align:center;
+            margin-top: 200px;
+            font-weight: bold;
+        }
+        .loader span{
+            width:16px;
+            height:16px;
+            border-radius:50%;
+            display:inline-block;
+            position:absolute;
+            left:50%;
+            margin-left:-10px;
+            -webkit-animation:3s infinite linear;
+            -moz-animation:3s infinite linear;
+            -o-animation:3s infinite linear;
+        }
+        .loader span:nth-child(2){
+            background:#ffd8c7;
+            -webkit-animation:kiri 1.2s infinite linear;
+            -moz-animation:kiri 1.2s infinite linear;
+            -o-animation:kiri 1.2s infinite linear;
+
+        }
+        .loader span:nth-child(3){
+            background:#e4f5ff;
+            z-index:100;
+        }
+        .loader span:nth-child(4){
+            background:#5DA2D1;
+            -webkit-animation:kanan 1.2s infinite linear;
+            -moz-animation:kanan 1.2s infinite linear;
+            -o-animation:kanan 1.2s infinite linear;
+        }
+
+        @-webkit-keyframes kanan {
+            0% {-webkit-transform:translateX(20px);
+            }
+
+            50%{-webkit-transform:translateX(-20px);
+            }
+
+            100%{-webkit-transform:translateX(20px);
+            z-index:200;
+            }
+        }
+        @-moz-keyframes kanan {
+            0% {-moz-transform:translateX(20px);
+            }
+
+            50%{-moz-transform:translateX(-20px);
+            }
+
+            100%{-moz-transform:translateX(20px);
+            z-index:200;
+            }
+        }
+        @-o-keyframes kanan {
+            0% {-o-transform:translateX(20px);
+            }
+
+            50%{-o-transform:translateX(-20px);
+            }
+
+            100%{-o-transform:translateX(20px);
+            z-index:200;
+            }
+        }
+        @-webkit-keyframes kiri {
+             0% {-webkit-transform:translateX(-20px);
+            z-index:200;
+            }
+            50%{-webkit-transform:translateX(20px);
+            }
+            100%{-webkit-transform:translateX(-20px);
+            }
+        }
+        @-moz-keyframes kiri {
+             0% {-moz-transform:translateX(-20px);
+            z-index:200;
+            }
+            50%{-moz-transform:translateX(20px);
+            }
+            100%{-moz-transform:translateX(-20px);
+            }
+        }
+        @-o-keyframes kiri {
+             0% {-o-transform:translateX(-20px);
+            z-index:200;
+            }
+            50%{-o-transform:translateX(20px);
+            }
+            100%{-o-transform:translateX(-20px);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="body_wrap">
+        <form id="frm" action="/fileupload" method="post">
+            <input type="file" name="file" id="file" onchange="fuc()">
+            <label class="btn_upload" id="uploadBtn" for="file">사진올리기</label>
+        </form>
+        <div class="img_wrap">
+            <span class="speech_bubble" id="speech_emotion">"기분을 말해볼까요?"</span>
+            <img id="image">
+
+            <div class="loader">
+                <p>LOADING</p>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+    function fuc(){
+        var statusTextArr = ["화가난다아!!! &#x1F621;", "으... &#x1F623;", "무서워 &#x1F631;", "행복해요 &#x1F60A;", "슬퍼요... &#x1F62D;", "놀라짜낭!!! &#x1F632;", "음... &#x1F60C;"];
+        var textbox = document.getElementById("speech_emotion");
+
+        var formData = new FormData($("form")[0]);
+
+        $(".loader").show();
+
+       $.ajax({
+           type: "POST",
+           // dataType: "JSON",
+           data:formData,
+           url: "/fileUpload",
+           processData: false,
+           contentType: false,
+           // contentType: "application/json",
+           success: function(statusIdx){
+               console.log(statusIdx);
+               var json = JSON.parse(statusIdx);
+               statusIdx = Number(json.status);
+               textbox.style.display="block";
+               textbox.innerHTML = "\"" + statusTextArr[statusIdx] + "\"";
+               $(".loader").hide();
+           },
+           error: function(XHR, textStatus, errorThrown) {
+            console.log(XHR);
+            console.log(textStatus);
+            console.log(errorThrown);
+            $(".loader").hide();
+           }
+       });
+    }
+    $(document).ready(function () {
+        $("#file").on("change", function (evt) {
+              var preview = document.querySelector("img");
+              var file    = document.querySelector("input[type=file]").files[0];
+              var reader  = new FileReader();
+
+              reader.addEventListener("load", function () {
+                preview.src = reader.result;
+              }, false);
+
+              if (file) {
+                reader.readAsDataURL(file);
+              }
+
+        });
+    })
+    </script>
+</body>
+
+</html>
